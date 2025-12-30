@@ -1,109 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://CrisHB12.github.io/dev-guides/blog</id>
-    <title>Dev guides Blog</title>
-    <updated>2021-08-26T00:00:00.000Z</updated>
+    <title>Dev Guides Blog</title>
+    <updated>2026-01-10T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://CrisHB12.github.io/dev-guides/blog"/>
-    <subtitle>Dev guides Blog</subtitle>
+    <subtitle>Dev Guides Blog</subtitle>
     <icon>https://CrisHB12.github.io/dev-guides/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Welcome]]></title>
-        <id>https://CrisHB12.github.io/dev-guides/blog/welcome</id>
-        <link href="https://CrisHB12.github.io/dev-guides/blog/welcome"/>
-        <updated>2021-08-26T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Docusaurus blogging features are powered by the blog plugin.]]></summary>
-        <content type="html"><![CDATA[<p><a href="https://docusaurus.io/docs/blog" target="_blank" rel="noopener noreferrer" class="">Docusaurus blogging features</a> are powered by the <a href="https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog" target="_blank" rel="noopener noreferrer" class="">blog plugin</a>.</p>
-<p>Here are a few tips you might find useful.</p>
-<p>Simply add Markdown files (or folders) to the <code>blog</code> directory.</p>
-<p>Regular blog authors can be added to <code>authors.yml</code>.</p>
-<p>The blog post date can be extracted from filenames, such as:</p>
+        <title type="html"><![CDATA[5 Mejores Prácticas para Dockerfiles en Producción]]></title>
+        <id>https://CrisHB12.github.io/dev-guides/blog/mejores-practicas-docker</id>
+        <link href="https://CrisHB12.github.io/dev-guides/blog/mejores-practicas-docker"/>
+        <updated>2026-01-10T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Escribir un Dockerfile que funcione es fácil. Escribir uno que sea seguro, rápido y ligero requiere un poco más de cuidado. Aquí compartimos las 5 reglas de oro que seguimos en nuestros proyectos.]]></summary>
+        <content type="html"><![CDATA[<p>Escribir un <code>Dockerfile</code> que funcione es fácil. Escribir uno que sea seguro, rápido y ligero requiere un poco más de cuidado. Aquí compartimos las 5 reglas de oro que seguimos en nuestros proyectos.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-usa-imágenes-base-oficiales-y-específicas">1. Usa imágenes base oficiales y específicas<a href="https://crishb12.github.io/dev-guides/blog/mejores-practicas-docker#1-usa-im%C3%A1genes-base-oficiales-y-espec%C3%ADficas" class="hash-link" aria-label="Enlace directo al 1. Usa imágenes base oficiales y específicas" title="Enlace directo al 1. Usa imágenes base oficiales y específicas" translate="no">​</a></h2>
+<p>Evita usar la etiqueta <code>latest</code>. Nunca sabes qué versión real estás descargando, lo que hace que tus builds no sean deterministas.</p>
+<p>❌ <strong>Mal:</strong></p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">FROM node:latest</span><br></span></code></pre></div></div>
+<p>✅ <strong>Bien:</strong></p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">FROM node:20.9.0-alpine</span><br></span></code></pre></div></div>
+<p>Usar versiones específicas (<code>20.9.0</code>) y variantes ligeras (<code>alpine</code> o <code>slim</code>) reduce la superficie de ataque y el tamaño de la imagen.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-ordena-tus-capas-por-frecuencia-de-cambio">2. Ordena tus capas por frecuencia de cambio<a href="https://crishb12.github.io/dev-guides/blog/mejores-practicas-docker#2-ordena-tus-capas-por-frecuencia-de-cambio" class="hash-link" aria-label="Enlace directo al 2. Ordena tus capas por frecuencia de cambio" title="Enlace directo al 2. Ordena tus capas por frecuencia de cambio" translate="no">​</a></h2>
+<p>Docker cachea cada línea del Dockerfile como una capa. Si una capa cambia, todas las siguientes deben reconstruirse.</p>
+<p>Pon lo que <strong>menos cambia</strong> al principio (instalación de dependencias) y lo que <strong>más cambia</strong> al final (tu código fuente).</p>
+<p>✅ <strong>Bien:</strong></p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">WORKDIR /app</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">COPY package.json .</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">RUN npm install      # Esta capa pesada se cachea si package.json no cambia</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">COPY . .             # Solo esto se reconstruye si cambias tu código</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3-no-ejecutes-como-root">3. No ejecutes como Root<a href="https://crishb12.github.io/dev-guides/blog/mejores-practicas-docker#3-no-ejecutes-como-root" class="hash-link" aria-label="Enlace directo al 3. No ejecutes como Root" title="Enlace directo al 3. No ejecutes como Root" translate="no">​</a></h2>
+<p>Por defecto, los contenedores corren como <code>root</code>, lo cual es un riesgo de seguridad si alguien logra escapar del contenedor. Crea un usuario con menos privilegios.</p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">RUN addgroup -S appgroup &amp;&amp; adduser -S appuser -G appgroup</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">USER appuser</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="4-usa-dockerignore">4. Usa <code>.dockerignore</code><a href="https://crishb12.github.io/dev-guides/blog/mejores-practicas-docker#4-usa-dockerignore" class="hash-link" aria-label="Enlace directo al 4-usa-dockerignore" title="Enlace directo al 4-usa-dockerignore" translate="no">​</a></h2>
+<p>Es el error más común: copiar <code>node_modules</code> locales, archivos <code>.git</code> o secretos <code>.env</code> dentro de la imagen.</p>
+<p>Siempre ten un <code>.dockerignore</code>:</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">node_modules</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.git</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">.env</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Dockerfile</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">README.md</span><br></span></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="5-multi-stage-builds">5. Multi-stage Builds<a href="https://crishb12.github.io/dev-guides/blog/mejores-practicas-docker#5-multi-stage-builds" class="hash-link" aria-label="Enlace directo al 5. Multi-stage Builds" title="Enlace directo al 5. Multi-stage Builds" translate="no">​</a></h2>
+<p>Para lenguajes compilados (Go, Rust, .NET) o para optimizar frontends, usa builds multi-etapa para separar el entorno de construcción del de ejecución.</p>
+<div class="language-dockerfile codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-dockerfile codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Etapa de Build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">FROM node:20 AS builder</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">RUN npm run build</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Etapa Final (Producción)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">FROM nginx:alpine</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">COPY --from=builder /app/dist /usr/share/nginx/html</span><br></span></code></pre></div></div>
+<p>¡La imagen final solo tendrá Nginx y tus archivos estáticos, pesando unos 20MB en lugar de los 1GB de la imagen de Node!</p>
+<hr>
+<p>Sigue estos consejos y tus despliegues serán más rápidos y seguros. ¿Tienes algún otro truco? ¡Compártelo con el equipo!</p>]]></content>
+        <author>
+            <name>Equipo de Desarrollo</name>
+            <uri>https://github.com/CrisHB12</uri>
+        </author>
+        <category label="Docker" term="Docker"/>
+        <category label="Mejores Prácticas" term="Mejores Prácticas"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[¿Por qué elegimos Bun sobre Node.js?]]></title>
+        <id>https://CrisHB12.github.io/dev-guides/blog/por-que-usamos-bun</id>
+        <link href="https://CrisHB12.github.io/dev-guides/blog/por-que-usamos-bun"/>
+        <updated>2026-01-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[En el mundo del desarrollo de JavaScript, Node.js ha sido el rey indiscutible durante más de una década. Sin embargo, en Mural Táctil hemos tomado la decisión audaz de migrar nuestras herramientas y nuevas guías hacia Bun.]]></summary>
+        <content type="html"><![CDATA[<p>En el mundo del desarrollo de JavaScript, Node.js ha sido el rey indiscutible durante más de una década. Sin embargo, en <strong>Mural Táctil</strong> hemos tomado la decisión audaz de migrar nuestras herramientas y nuevas guías hacia <strong>Bun</strong>.</p>
+<p>¿Por qué cambiar algo que funciona? La respuesta corta es: <strong>Velocidad y Simplicidad</strong>.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="el-problema-de-la-fatiga-de-herramientas">El problema de la "Fatiga de Herramientas"<a href="https://crishb12.github.io/dev-guides/blog/por-que-usamos-bun#el-problema-de-la-fatiga-de-herramientas" class="hash-link" aria-label="Enlace directo al El problema de la &quot;Fatiga de Herramientas&quot;" title="Enlace directo al El problema de la &quot;Fatiga de Herramientas&quot;" translate="no">​</a></h2>
+<p>Antes de Bun, iniciar un proyecto moderno de TypeScript requería una danza compleja:</p>
+<ol>
+<li class="">Instalar Node.js.</li>
+<li class="">Instalar un gestor de paquetes (<code>npm</code>, <code>yarn</code> o <code>pnpm</code>).</li>
+<li class="">Instalar un compilador de TypeScript (<code>tsc</code>).</li>
+<li class="">Configurar un Bundler (<code>Webpack</code>, <code>Vite</code>, <code>Rollup</code>).</li>
+<li class="">Configurar un Test Runner (<code>Jest</code>, <code>Mocha</code>, <code>Vitest</code>).</li>
+<li class="">Configurar cargadores de variables de entorno (<code>dotenv</code>).</li>
+</ol>
+<p>Son <strong>6 herramientas distintas</strong> que hay que configurar y mantener actualizadas.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="la-solución-bun">La Solución Bun<a href="https://crishb12.github.io/dev-guides/blog/por-que-usamos-bun#la-soluci%C3%B3n-bun" class="hash-link" aria-label="Enlace directo al La Solución Bun" title="Enlace directo al La Solución Bun" translate="no">​</a></h2>
+<p>Bun reemplaza <strong>todas</strong> esas herramientas con un solo binario.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1-todo-en-uno">1. Todo en Uno<a href="https://crishb12.github.io/dev-guides/blog/por-que-usamos-bun#1-todo-en-uno" class="hash-link" aria-label="Enlace directo al 1. Todo en Uno" title="Enlace directo al 1. Todo en Uno" translate="no">​</a></h3>
+<p>Con Bun, no necesitamos <code>ts-node</code>, ni <code>jest</code>, ni <code>dotenv</code>.</p>
 <ul>
-<li class=""><code>2019-05-30-welcome.md</code></li>
-<li class=""><code>2019-05-30-welcome/index.md</code></li>
+<li class="">¿Quieres correr un test? <code>bun test</code>.</li>
+<li class="">¿Quieres correr un script <code>.ts</code>? <code>bun index.ts</code>.</li>
+<li class="">¿Quieres instalar paquetes? <code>bun install</code>.</li>
 </ul>
-<p>A blog post folder can be convenient to co-locate blog post images:</p>
-<p><img decoding="async" loading="lazy" alt="Docusaurus Plushie" src="https://crishb12.github.io/dev-guides/assets/images/docusaurus-plushie-banner-a60f7593abca1e3eef26a9afa244e4fb.jpeg" width="1500" height="500" class="img_ev3q"></p>
-<p>The blog supports tags as well!</p>
-<p><strong>And if you don't want a blog</strong>: just delete this directory, and use <code>blog: false</code> in your Docusaurus config.</p>]]></content>
+<p>Esto reduce drásticamente nuestros archivos de configuración y la complejidad cognitiva para los nuevos desarrolladores.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2-velocidad-que-se-siente">2. Velocidad que se siente<a href="https://crishb12.github.io/dev-guides/blog/por-que-usamos-bun#2-velocidad-que-se-siente" class="hash-link" aria-label="Enlace directo al 2. Velocidad que se siente" title="Enlace directo al 2. Velocidad que se siente" translate="no">​</a></h3>
+<p>No estamos hablando de mejoras del 10% o 20%. En nuestros pipelines de CI/CD, hemos visto reducciones de tiempo de instalación de dependencias de <strong>minutos a segundos</strong>.</p>
+<blockquote>
+<p>"El tiempo que un desarrollador pasa esperando a que termine <code>npm install</code> es tiempo perdido de creatividad."</p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="es-arriesgado">¿Es arriesgado?<a href="https://crishb12.github.io/dev-guides/blog/por-que-usamos-bun#es-arriesgado" class="hash-link" aria-label="Enlace directo al ¿Es arriesgado?" title="Enlace directo al ¿Es arriesgado?" translate="no">​</a></h2>
+<p>Reconocemos que Bun es más joven que Node.js. Sin embargo, su compatibilidad con las APIs de Node ha alcanzado un punto de madurez donde la mayoría de nuestras dependencias funcionan sin cambios.</p>
+<p>Para nosotros, la ganancia en <strong>Experiencia de Desarrollo (DX)</strong> supera con creces los pequeños inconvenientes de adopción temprana.</p>
+<p>Si aún no lo has probado, te invitamos a leer nuestra <a class="" href="https://crishb12.github.io/dev-guides/docs/bun/intro">Guía de Introducción a Bun</a> y darle una oportunidad.</p>]]></content>
         <author>
-            <name>Sébastien Lorber</name>
-            <uri>https://sebastienlorber.com</uri>
+            <name>Equipo de Desarrollo</name>
+            <uri>https://github.com/CrisHB12</uri>
         </author>
-        <author>
-            <name>Yangshun Tay</name>
-            <uri>https://linkedin.com/in/yangshun</uri>
-        </author>
-        <category label="Facebook" term="Facebook"/>
-        <category label="Hello" term="Hello"/>
-        <category label="Docusaurus" term="Docusaurus"/>
+        <category label="Bun" term="Bun"/>
+        <category label="Opinión" term="Opinión"/>
     </entry>
     <entry>
-        <title type="html"><![CDATA[MDX Blog Post]]></title>
-        <id>https://CrisHB12.github.io/dev-guides/blog/mdx-blog-post</id>
-        <link href="https://CrisHB12.github.io/dev-guides/blog/mdx-blog-post"/>
-        <updated>2021-08-01T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Blog posts support Docusaurus Markdown features, such as MDX.]]></summary>
-        <content type="html"><![CDATA[<p>Blog posts support <a href="https://docusaurus.io/docs/markdown-features" target="_blank" rel="noopener noreferrer" class="">Docusaurus Markdown features</a>, such as <a href="https://mdxjs.com/" target="_blank" rel="noopener noreferrer" class="">MDX</a>.</p>
-<div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><p>Use the power of React to create interactive blog posts.</p></div></div>
-<!-- -->
-<p>For example, use JSX to create an interactive button:</p>
-<div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain">button onClick</span><span class="token operator" style="color:#393A34">=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token arrow operator" style="color:#393A34">=&gt;</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">alert</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">'button clicked!'</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">}</span><span class="token operator" style="color:#393A34">&gt;</span><span class="token maybe-class-name">Click</span><span class="token plain"> me</span><span class="token operator" style="color:#393A34">!</span><span class="token operator" style="color:#393A34">&lt;</span><span class="token operator" style="color:#393A34">/</span><span class="token plain">button</span><span class="token operator" style="color:#393A34">&gt;</span><br></span></code></pre></div></div>
-<button>Click me!</button>]]></content>
+        <title type="html"><![CDATA[¡Bienvenidos a Dev Guides!]]></title>
+        <id>https://CrisHB12.github.io/dev-guides/blog/lanzamiento-dev-guides</id>
+        <link href="https://CrisHB12.github.io/dev-guides/blog/lanzamiento-dev-guides"/>
+        <updated>2025-12-30T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Estamos emocionados de anunciar el lanzamiento de Dev Guides, nuestro nuevo portal centralizado de documentación diseñado para desarrolladores.]]></summary>
+        <content type="html"><![CDATA[<p>Estamos emocionados de anunciar el lanzamiento de <strong>Dev Guides</strong>, nuestro nuevo portal centralizado de documentación diseñado para desarrolladores.</p>
+<p>La idea de este proyecto es simple: <strong>tener una única fuente de verdad</strong> para nuestros estándares, guías y tutoriales técnicos.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="qué-encontrarás-aquí">¿Qué encontrarás aquí?<a href="https://crishb12.github.io/dev-guides/blog/lanzamiento-dev-guides#qu%C3%A9-encontrar%C3%A1s-aqu%C3%AD" class="hash-link" aria-label="Enlace directo al ¿Qué encontrarás aquí?" title="Enlace directo al ¿Qué encontrarás aquí?" translate="no">​</a></h2>
+<p>Hemos comenzado documentando las herramientas esenciales que utilizamos día a día:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="1--docusaurus">1. 🦕 Docusaurus<a href="https://crishb12.github.io/dev-guides/blog/lanzamiento-dev-guides#1--docusaurus" class="hash-link" aria-label="Enlace directo al 1. 🦕 Docusaurus" title="Enlace directo al 1. 🦕 Docusaurus" translate="no">​</a></h3>
+<p>Aprenderás cómo mantener y extender este mismo sitio web. Hemos incluido guías sobre:</p>
+<ul>
+<li class=""><a class="" href="https://crishb12.github.io/dev-guides/docs/docusaurus/setup">Instalación y configuración</a></li>
+<li class=""><a class="" href="https://crishb12.github.io/dev-guides/docs/docusaurus/writing-docs">Cómo escribir documentación efectiva</a></li>
+<li class="">Internacionalización (i18n)</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2--docker">2. 🐳 Docker<a href="https://crishb12.github.io/dev-guides/blog/lanzamiento-dev-guides#2--docker" class="hash-link" aria-label="Enlace directo al 2. 🐳 Docker" title="Enlace directo al 2. 🐳 Docker" translate="no">​</a></h3>
+<p>La contenedorización es clave. Nuestras guías cubren:</p>
+<ul>
+<li class="">Conceptos básicos para principiantes.</li>
+<li class="">Recetas de <code>Dockerfile</code> para Node, Python y .NET.</li>
+<li class="">Orquestación con <strong>Docker Compose</strong>.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="3--bun">3. 🥟 Bun<a href="https://crishb12.github.io/dev-guides/blog/lanzamiento-dev-guides#3--bun" class="hash-link" aria-label="Enlace directo al 3. 🥟 Bun" title="Enlace directo al 3. 🥟 Bun" translate="no">​</a></h3>
+<p>Hemos adoptado <a href="https://bun.sh/" target="_blank" rel="noopener noreferrer" class="">Bun</a> como nuestro runtime principal por su velocidad y eficiencia. En la sección de Bun encontrarás:</p>
+<ul>
+<li class="">Comparativas de rendimiento vs Node.js.</li>
+<li class="">Cómo usarlo como Bundler y Test Runner.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="qué-sigue">¿Qué sigue?<a href="https://crishb12.github.io/dev-guides/blog/lanzamiento-dev-guides#qu%C3%A9-sigue" class="hash-link" aria-label="Enlace directo al ¿Qué sigue?" title="Enlace directo al ¿Qué sigue?" translate="no">​</a></h2>
+<p>Este es un proyecto vivo. En las próximas semanas planeamos añadir:</p>
+<ul>
+<li class="">Guías de CI/CD (GitHub Actions).</li>
+<li class="">Patrones de arquitectura de software.</li>
+<li class="">Mejores prácticas de seguridad.</li>
+</ul>
+<p>¡Gracias por visitarnos y no dudes en contribuir!</p>]]></content>
         <author>
-            <name>Sébastien Lorber</name>
-            <uri>https://sebastienlorber.com</uri>
+            <name>Equipo de Desarrollo</name>
+            <uri>https://github.com/CrisHB12</uri>
         </author>
-        <category label="Docusaurus" term="Docusaurus"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Long Blog Post]]></title>
-        <id>https://CrisHB12.github.io/dev-guides/blog/long-blog-post</id>
-        <link href="https://CrisHB12.github.io/dev-guides/blog/long-blog-post"/>
-        <updated>2019-05-29T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[This is the summary of a very long blog post,]]></summary>
-        <content type="html"><![CDATA[<p>This is the summary of a very long blog post,</p>
-<p>Use a <code>&lt;!--</code> <code>truncate</code> <code>--&gt;</code> comment to limit blog post size in the list view.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content>
-        <author>
-            <name>Yangshun Tay</name>
-            <uri>https://linkedin.com/in/yangshun</uri>
-        </author>
-        <category label="Hello" term="Hello"/>
-        <category label="Docusaurus" term="Docusaurus"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://CrisHB12.github.io/dev-guides/blog/first-blog-post</id>
-        <link href="https://CrisHB12.github.io/dev-guides/blog/first-blog-post"/>
-        <updated>2019-05-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Lorem ipsum dolor sit amet...]]></summary>
-        <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
-<p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content>
-        <author>
-            <name>Sébastien Lorber</name>
-            <uri>https://sebastienlorber.com</uri>
-        </author>
-        <author>
-            <name>Yangshun Tay</name>
-            <uri>https://linkedin.com/in/yangshun</uri>
-        </author>
-        <category label="Hola" term="Hola"/>
-        <category label="Docusaurus" term="Docusaurus"/>
+        <category label="Anuncios" term="Anuncios"/>
+        <category label="General" term="General"/>
     </entry>
 </feed>
