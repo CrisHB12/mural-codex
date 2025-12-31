@@ -4,15 +4,15 @@ title: Introducción
 slug: /intro
 ---
 
-# Introducción a Dev Guides
+# Introducción al Mural Codex
+    
+¡Bienvenido al **Mural Codex**, el portal de documentación técnica de **Mural Táctil**!
 
-¡Bienvenido al portal de documentación técnica de **Mural Táctil**!
-
-Este repositorio (`dev-guides`) nace con la misión de centralizar el conocimiento técnico del equipo, estandarizar nuestros procesos de desarrollo y facilitar la incorporación de nuevos miembros.
+Este repositorio (`mural-codex`) nace con la misión de centralizar el conocimiento técnico del equipo, estandarizar nuestros procesos de desarrollo y facilitar la incorporación de nuevos miembros.
 
 ## 🎯 Objetivo del Proyecto
 
-En un entorno de desarrollo ágil, la información tiende a dispersarse entre chats, correos y wikis obsoletas. **Dev Guides** resuelve esto actuando como la **única fuente de verdad** para:
+En un entorno de desarrollo ágil, la información tiende a dispersarse entre chats, correos y wikis obsoletas. **Mural Codex** resuelve esto actuando como la **única fuente de verdad** para:
 
 *   **Estándares de Código:** Cómo escribimos y estructuramos nuestro software.
 *   **Guías de Herramientas:** Cómo configurar y usar Docker, Bun, Git, etc.

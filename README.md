@@ -1,12 +1,12 @@
-# Developer Guides
+# Mural Codex
 
-Welcome to the **Developer Guides** repository! This project serves as a comprehensive collection of technical documentation, tutorials, and best practices for developers. It is updated regularly to help you navigate through various technologies and workflow standardizations.
+Welcome to **Mural Codex**! This project serves as the comprehensive collection of technical documentation, tutorials, and best practices for the Mural Táctil engineering team. It is updated regularly to help you navigate through various technologies and workflow standardizations.
 
 ## 📚 About The Project
 
-This website is a static documentation site built using [Docusaurus](https://docusaurus.io/), a modern static website generator designed to make it easy to maintain and publish documentation.
+This website is a static documentation site built using [Docusaurus](https://docusaurus.io/).
 
-The goal of this repository is to provide:
+The goal of the **Codex** is to provide:
 -   **Centralized Knowledge**: A single source of truth for developer guides.
 -   **Tutorials**: Step-by-step instructions for common tasks (e.g., Docker, Docusaurus).
 -   **Best Practices**: Standardized procedures and coding guidelines.

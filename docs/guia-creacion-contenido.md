@@ -1,11 +1,11 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 title: Guía de Creación de Contenido
 ---
 
 # Guía Interna: Cómo Generar Documentación
 
-Esta guía está dirigida a los colaboradores del proyecto **Dev Guides**. Aquí se detallan los estándares y pasos necesarios para crear, estructurar y publicar nueva documentación en este repositorio.
+Esta guía está dirigida a los colaboradores del proyecto **Mural Codex**. Aquí se detallan los estándares y pasos necesarios para crear, estructurar y publicar nueva documentación en este repositorio.
 
 ## 1. Flujo de Trabajo Rápido
 

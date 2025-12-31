@@ -1,0 +1,8 @@
+{
+    "label": "Flujo de Trabajo",
+    "position": 3,
+    "link": {
+        "type": "generated-index",
+        "description": "Estándares de colaboración, control de versiones y revisión de código."
+    }
+}

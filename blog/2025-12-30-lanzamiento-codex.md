@@ -1,12 +1,12 @@
 ---
-slug: lanzamiento-dev-guides
-title: ¡Bienvenidos a Dev Guides!
+slug: lanzamiento-mural-codex
+title: ¡Bienvenidos al Mural Codex!
 authors: [devteam]
-tags: [anuncio, general]
+tags: [anuncio, general, codex]
 date: 2025-12-30
 ---
 
-Estamos emocionados de anunciar el lanzamiento de **Dev Guides**, nuestro nuevo portal centralizado de documentación diseñado para desarrolladores.
+Estamos emocionados de anunciar el lanzamiento del **Mural Codex**, nuestro nuevo portal centralizado de documentación diseñado para desarrolladores.
 
 La idea de este proyecto es simple: **tener una única fuente de verdad** para nuestros estándares, guías y tutoriales técnicos.
 

@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Dev Guides',
-  tagline: 'Documentación técnica estandarizada y guías de desarrollo',
+  title: 'Mural Codex',
+  tagline: 'El archivo central de conocimiento técnico de Mural Táctil',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -18,12 +18,12 @@ const config: Config = {
   url: 'https://CrisHB12.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/dev-guides/',
+  baseUrl: '/mural-codex/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'CrisHB12', // Usually your GitHub org/user name.
-  projectName: 'dev-guides', // Usually your repo name.
+  projectName: 'mural-codex', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -46,7 +46,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/CrisHB12/dev-guides/tree/main/',
+            'https://github.com/CrisHB12/mural-codex/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -57,7 +57,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/CrisHB12/dev-guides/tree/main/',
+            'https://github.com/CrisHB12/mural-codex/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -77,9 +77,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Dev Guides',
+      title: 'Mural Codex',
       logo: {
-        alt: 'Logo',
+        alt: 'Codex Logo',
         src: 'img/logo.svg',
       },
       items: [
@@ -87,11 +87,47 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Documentación',
+          label: 'Inicio',
+        },
+        // Dropdown de Categorías para acceso rápido
+        {
+          type: 'dropdown',
+          label: 'Tecnologías',
+          position: 'left',
+          items: [
+            {
+              label: 'Frontend (React + UI)',
+              to: '/docs/react/intro',
+            },
+            {
+              label: 'Backend (Bun + Docker)',
+              to: '/docs/bun/intro',
+            },
+            {
+              label: 'Lenguajes (TS)',
+              to: '/docs/typescript/intro',
+            },
+          ],
+        },
+        // Dropdown de Workflow
+        {
+          type: 'dropdown',
+          label: 'Workflow',
+          position: 'left',
+          items: [
+            {
+              label: 'Git & GitHub',
+              to: '/docs/workflow/git-standards',
+            },
+            {
+              label: 'Documentación',
+              to: '/docs/docusaurus/setup',
+            },
+          ],
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
-          href: 'https://github.com/CrisHB12/dev-guides',
+          href: 'https://github.com/CrisHB12/mural-codex',
           label: 'GitHub',
           position: 'right',
         },
@@ -101,7 +137,7 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'El Codex',
           items: [
             {
               label: 'Introducción',
@@ -122,7 +158,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Issues',
-              href: 'https://github.com/CrisHB12/dev-guides/issues',
+              href: 'https://github.com/CrisHB12/mural-codex/issues',
             },
           ],
         },
@@ -130,12 +166,12 @@ const config: Config = {
           title: 'Más',
           items: [
             {
-              label: 'Blog',
+              label: 'Novedades',
               to: '/blog',
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/CrisHB12/dev-guides',
+              href: 'https://github.com/CrisHB12/mural-codex',
             },
           ],
         },

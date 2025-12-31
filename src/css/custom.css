@@ -2,21 +2,21 @@
  * Global CSS styles
  */
 
- :root {
-  /* Modern Color Palette (Violet/Blue/Teal Gradient Vibe) */
-  --ifm-color-primary: #6c5ce7;
-  --ifm-color-primary-dark: #5b4cc4;
-  --ifm-color-primary-darker: #5243b0;
-  --ifm-color-primary-darkest: #41358c;
-  --ifm-color-primary-light: #8376eb;
-  --ifm-color-primary-lighter: #8f83ee;
-  --ifm-color-primary-lightest: #b0a8f4;
-  
+:root {
+  /* Mural Codex Palette - Deep Corporate Blue/Indigo */
+  --ifm-color-primary: #4e54c8;
+  --ifm-color-primary-dark: #3f44a8;
+  --ifm-color-primary-darker: #3a3f9e;
+  --ifm-color-primary-darkest: #2f3482;
+  --ifm-color-primary-light: #7076e0;
+  --ifm-color-primary-lighter: #8086e8;
+  --ifm-color-primary-lightest: #aaaff5;
+
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
 
   /* Custom Variables */
-  --site-hero-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --site-hero-gradient: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
   --site-card-bg: rgba(255, 255, 255, 0.8);
   --site-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
@@ -29,12 +29,12 @@
   --ifm-color-primary-light: #c3bff0;
   --ifm-color-primary-lighter: #d3d0f2;
   --ifm-color-primary-lightest: #efeefb;
-  
+
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
 
   /* Custom Variables Dark */
   --site-hero-gradient: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-  --site-card-bg: rgba(30, 30, 30, 0.6); 
+  --site-card-bg: rgba(30, 30, 30, 0.6);
   --site-card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
@@ -80,6 +80,7 @@ body {
 
 .hero-title span {
   background: -webkit-linear-gradient(120deg, var(--ifm-color-primary), #00b894);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -112,7 +113,7 @@ body {
 
 .button-custom:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   text-decoration: none;
 }
 
@@ -121,6 +122,7 @@ body {
   color: #fff;
   border: none;
 }
+
 .button-primary:hover {
   color: #fff;
   background: var(--ifm-color-primary-dark);

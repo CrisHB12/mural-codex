@@ -15,13 +15,11 @@ export default function Home(): JSX.Element {
       {/* Hero Section */}
       <header className="hero-section">
         <h1 className="hero-title">
-          Construye software <br />
-          <span>Más Rápido y Mejor</span>
+          <span>Mural Codex</span>
         </h1>
         <p className="hero-subtitle">
-          Bienvenido a <b>Dev Guides</b>, la plataforma centralizada de conocimiento de Mural Táctil.
-          Aquí encontrarás estándares, guías de arquitectura, documentación de herramientas y mejores prácticas
-          para elevar la calidad de nuestro software.
+          El <b>Codex</b> es el compendio de conocimientos, estándares y mejores prácticas
+          que guían la ingeniería en Mural Táctil. Explora nuestras tecnologías y flujos de trabajo.
         </p>
         <div className="cta-buttons">
           <Link
